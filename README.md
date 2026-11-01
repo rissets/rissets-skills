@@ -1,22 +1,16 @@
 # Rissets Skills
 
-[![skills.sh](https://skills.sh/b/rissets/rissets-skills)](https://skills.sh/rissets/rissets-skills)
+Reusable agent skills for engineering and productivity, maintained by Rissets. Use them to clarify requirements, plan implementation, build with feedback, review changes, and carry context between sessions.
 
-Agent skills for engineering and productivity, maintained by Rissets.
+- **Documentation:** [hi.rissets.com](https://hi.rissets.com)
+- **Source and updates:** [rissets/rissets-skills](https://github.com/rissets/rissets-skills)
+- **Questions and bugs:** [GitHub Issues](https://github.com/rissets/rissets-skills/issues)
 
-Documentation: [hi.rissets.com](https://hi.rissets.com). Adapted from [Matt Pocock’s skills](https://github.com/mattpocock/skills), under the [MIT license](./LICENSE).
+The promoted collection contains 27 skills: 20 for engineering and 7 for productivity. Skills are plain Markdown with supporting references and scripts where needed. Choose a single skill for a focused task, or combine them into a workflow while keeping human decisions explicit.
 
-Developing real applications is hard. Approaches like GSD, BMAD, and Spec-Kit try to help by owning the process. But while doing so, they take away your control and make bugs in the process hard to resolve.
+## Installation
 
-These skills are designed to be small, easy to adapt, and composable. They work with any model. They're based on decades of engineering experience. Hack around with them. Make them your own. Enjoy.
-
-If you want to keep up with changes to these skills, and any new ones I create, you can join ~60,000 other devs on my newsletter:
-
-[Sign Up To The Newsletter](https://hi.rissets.com)
-
-## Installation (30-second setup)
-
-A plugin updates itself. [skills.sh](https://skills.sh/rissets/rissets-skills) copies editable files into your project, and you update them by hand. Pick one per agent, because installing both gives you every skill twice.
+Choose one installation route per runtime. Plugin installations use the Rissets marketplace; update settings depend on the runtime. The skills.sh route installs into your project by default and requires manual updates. Its two bucket-scoped commands select only promoted skills.
 
 ### 1. Get the skills
 
@@ -140,107 +134,46 @@ Run it once per repo. In Pi, type `/skill:setup-rissets-skills`. In Antigravity 
 - Ask you what labels you apply to tickets when you triage them (`/triage` uses labels)
 - Ask you where you want to save any docs we create
 
-### 3. Bam - you're ready to go.
+### 3. Choose your next skill
 
-## Why These Skills Exist
+Start with [ask-rissets](./skills/engineering/ask-rissets/SKILL.md) when you want help choosing a skill or workflow. In Claude Code, type `/ask-rissets`; in Codex, use `$ask-rissets`; in Pi, use `/skill:ask-rissets`. In Antigravity and OpenCode, ask the agent to load `ask-rissets`.
 
-These skills address common failure modes in Claude Code, Codex, and other coding agents.
+Examples in this README use `/skill-name` as shorthand. Use your runtime's explicit skill invocation when its syntax differs.
 
-### #1: The Agent Didn't Do What I Want
 
-> "No-one knows exactly what they want"
->
-> David Thomas & Andrew Hunt, [The Pragmatic Programmer](https://www.amazon.co.uk/Pragmatic-Programmer-Anniversary-Journey-Mastery/dp/B0833F1T3V)
+## Working with Rissets Skills
 
-**The Problem**. The most common failure mode in software development is misalignment. You think the dev knows what you want. Then you see what they've built - and you realize it didn't understand you at all.
+| Situation | Start here | What you get |
+| --- | --- | --- |
+| An idea needs clearer requirements | [grill-with-docs](./skills/engineering/grill-with-docs/SKILL.md) | An interview that sharpens the plan and records domain language and decisions |
+| The discussion is ready to become a plan | [to-spec](./skills/engineering/to-spec/SKILL.md) | A spec synthesized from the conversation |
+| A plan needs executable slices | [to-tickets](./skills/engineering/to-tickets/SKILL.md) | Implementation issues with dependencies |
+| A spec or set of issues is ready to build | [implement](./skills/engineering/implement/SKILL.md) | Implementation with test feedback and code review |
+| A bug is difficult to reproduce or explain | [diagnosing-bugs](./skills/engineering/diagnosing-bugs/SKILL.md) | A reproduction loop, diagnosis, fix, and regression check |
+| A branch needs review | [code-review](./skills/engineering/code-review/SKILL.md) | Findings against the spec and repository standards |
+| A session exposed recurring friction | [retro](./skills/engineering/retro/SKILL.md) | Improvements to the agent's working environment |
+| A plan needs discussion without a working directory | [grill-me](./skills/productivity/grill-me/SKILL.md) | An interview without writing local domain documents |
 
-This is just the same in the AI age. There is a communication gap between you and the agent. The fix for this is a **grilling session** - getting the agent to ask you detailed questions about what you're building.
+A typical engineering flow is:
 
-**The Fix** is to use:
+```text
+grill-with-docs → to-spec → to-tickets → implement → code-review → retro
+```
 
-- [`/grill-me`](./skills/productivity/grill-me/SKILL.md) - for non-code uses
-- [`/grill-with-docs`](./skills/engineering/grill-with-docs/SKILL.md) - same as [`/grill-me`](./skills/productivity/grill-me/SKILL.md), but adds more goodies (see below)
+Use only the steps the task needs. For a small, well-defined behavior, reach directly for [tdd](./skills/engineering/tdd/SKILL.md). For work spanning more than one planning session, [wayfinder](./skills/engineering/wayfinder/SKILL.md) maintains a shared map of decisions. [ask-rissets](./skills/engineering/ask-rissets/SKILL.md) describes how the flows fit together.
 
-These are my most popular skills. They help you align with the agent before you get started, and think deeply about the change you're making. Use them _every_ time you want to make a change.
+## Repository layout
 
-### #2: The Agent Is Way Too Verbose
+| Location | Purpose | Included in the plugin |
+| --- | --- | --- |
+| [`skills/engineering/`](./skills/engineering/README.md) | Promoted skills for code work | Yes |
+| [`skills/productivity/`](./skills/productivity/README.md) | Promoted skills for general workflows | Yes |
+| [`skills/in-progress/`](./skills/in-progress/README.md) | Public beta skills for feedback | No |
+| [`skills/misc/`](./skills/misc/README.md) | Skills kept for occasional use | No |
+| `skills/deprecated/` | Retired skills | No |
+| [`docs/`](./docs/) | Human-facing documentation and runtime verification | Documentation only |
 
-> With a ubiquitous language, conversations among developers and expressions of the code are all derived from the same domain model.
->
-> Eric Evans, [Domain-Driven-Design](https://www.amazon.co.uk/Domain-Driven-Design-Tackling-Complexity-Software/dp/0321125215)
-
-**The Problem**: At the start of a project, devs and the people they're building the software for (the domain experts) are usually speaking different languages.
-
-I felt the same tension with my agents. Agents are usually dropped into a project and asked to figure out the jargon as they go. So they use 20 words where 1 will do.
-
-**The Fix** for this is a shared language. It's a document that helps agents decode the jargon used in the project.
-
-<details>
-<summary>
-Example
-</summary>
-
-Here's an example [glossary](https://github.com/mattpocock/course-video-manager/blob/076a5a7a182db0fe1e62971dd7a68bcadf010f1c/CONTEXT.md) (still named `CONTEXT.md` at that pinned commit, from before the skills renamed the convention), from the upstream author’s `course-video-manager` repo. Which one is easier to read?
-
-- **BEFORE**: "There's a problem when a lesson inside a section of a course is made 'real' (i.e. given a spot in the file system)"
-- **AFTER**: "There's a problem with the materialization cascade"
-
-This concision pays off session after session.
-
-</details>
-
-This is built into [`/grill-with-docs`](./skills/engineering/grill-with-docs/SKILL.md). It's a grilling session, but that helps you build a shared language with the AI, and document hard-to-explain decisions in ADR's.
-
-It's hard to explain how powerful this is. It might be the single coolest technique in this repo. Try it, and see.
-
-> [!TIP]
-> A shared language has many other benefits than reducing verbosity:
->
-> - **Variables, functions and files are named consistently**, using the shared language
-> - As a result, the **codebase is easier to navigate** for the agent
-> - The agent also **spends fewer tokens on thinking**, because it has access to a more concise language
-
-### #3: The Code Doesn't Work
-
-> "Always take small, deliberate steps. The rate of feedback is your speed limit. Never take on a task that’s too big."
->
-> David Thomas & Andrew Hunt, [The Pragmatic Programmer](https://www.amazon.co.uk/Pragmatic-Programmer-Anniversary-Journey-Mastery/dp/B0833F1T3V)
-
-**The Problem**: Let's say that you and the agent are aligned on what to build. What happens when the agent _still_ produces crap?
-
-It's time to look at your feedback loops. Without feedback on how the code it produces actually runs, the agent will be flying blind.
-
-**The Fix**: You need the usual tranche of feedback loops: static types, browser access, and automated tests.
-
-For automated tests, a red-green-refactor loop is critical. This is where the agent writes a failing test first, then fixes the test. This helps give the agent a consistent level of feedback that results in far better code.
-
-I've built a **[`/tdd`](./skills/engineering/tdd/SKILL.md) skill** you can slot into any project. It encourages red-green-refactor and gives the agent plenty of guidance on what makes good and bad tests.
-
-For debugging, I've also built a **[`/diagnosing-bugs`](./skills/engineering/diagnosing-bugs/SKILL.md)** skill that wraps best debugging practices into a disciplined loop, gated phase by phase.
-
-### #4: We Built A Ball Of Mud
-
-> "Invest in the design of the system _every day_."
->
-> Kent Beck, [Extreme Programming Explained](https://www.amazon.co.uk/Extreme-Programming-Explained-Embrace-Change/dp/0321278658)
-
-> "The best modules are deep. They allow a lot of functionality to be accessed through a simple interface."
->
-> John Ousterhout, [A Philosophy Of Software Design](https://www.amazon.co.uk/Philosophy-Software-Design-2nd/dp/173210221X)
-
-**The Problem**: Most apps built with agents are complex and hard to change. Because agents can radically speed up coding, they also accelerate software entropy. Codebases get more complex at an unprecedented rate.
-
-**The Fix** for this is a radical new approach to AI-powered development: caring about the design of the code.
-
-This is built in to every layer of these skills:
-
-- [`/to-spec`](./skills/engineering/to-spec/SKILL.md) quizzes you about which modules you're touching before creating a spec
-
-And crucially, [`/improve-codebase-architecture`](./skills/engineering/improve-codebase-architecture/SKILL.md) surveys a codebase for deepening opportunities and hands you the candidates. I recommend running it on your codebase once every few days. It is a survey, not a rescue: on a genuinely old codebase it will find real candidates, but it won't untangle the mud for you.
-
-### Summary
-
-Software engineering fundamentals matter more than ever. These skills condense these fundamentals into repeatable practices, to help you ship the best apps of your career. Enjoy.
+Published skill documentation targets `https://hi.rissets.com/skills-<skill-name>`. The files under `docs/engineering/` and `docs/productivity/` mirror the promoted skill folders. Repository updates do not deploy the website.
 
 ## Reference
 
@@ -248,7 +181,7 @@ These split on one axis: who can invoke them. **User-invoked** skills are reacha
 
 ### Engineering
 
-Skills I use daily for code work.
+Skills for planning, building, debugging, and reviewing software.
 
 **User-invoked**
 
@@ -292,3 +225,24 @@ General workflow tools, not code-specific.
 
 - **[grilling](./skills/productivity/grilling/SKILL.md)**: Interview the user relentlessly about a plan, decision, or idea until every branch of the design tree is resolved. The reusable interview primitive behind `grill-me`, `grill-with-docs`, `triage`, `wayfinder` and `improve-codebase-architecture`.
 - **[writing-for-agents](./skills/productivity/writing-for-agents/SKILL.md)**: Writing documents for agents: skills, AGENTS.md/CLAUDE.md, and any doc an agent reaches by a pointer.
+
+## Migrating from the upstream collection
+
+Rissets uses the repository `rissets/rissets-skills`, plugin `rissets-skills`, and marketplace `rissets`.
+
+| Upstream skill | Rissets skill |
+| --- | --- |
+| `ask-matt` | [ask-rissets](./skills/engineering/ask-rissets/SKILL.md) |
+| `setup-matt-pocock-skills` | [setup-rissets-skills](./skills/engineering/setup-rissets-skills/SKILL.md) |
+
+The old skill names are not installed as aliases. Installing Rissets does not uninstall the upstream collection. Choose one distribution per runtime to avoid duplicate skills, and update any saved commands or workflow references to the new names.
+
+Installation examples track the default `main` branch. Changes on a feature branch become available through those commands after they are merged. See [runtime support and verification](./docs/agents/runtime-support.md) for the tested installation paths and remaining verification limits.
+
+## Contributing
+
+Read [CONTRIBUTING.md](./CONTRIBUTING.md) and [SCOPE.md](./SCOPE.md) before opening an issue or proposing a skill. Report bugs and suggest improvements in [this repository's issues](https://github.com/rissets/rissets-skills/issues).
+
+## License and attribution
+
+Rissets Skills is adapted from [Matt Pocock's skills](https://github.com/mattpocock/skills). The upstream copyright notice is preserved in [LICENSE](./LICENSE). The collection is distributed under the MIT license.
