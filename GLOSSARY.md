@@ -1,8 +1,14 @@
-# Matt Pocock Skills
+# Rissets Skills
 
-A collection of agent skills (slash commands and behaviors) loaded by Claude Code. Skills are organized into buckets and consumed by per-repo configuration emitted by `/setup-matt-pocock-skills`.
+A collection of agent skills (slash commands and behaviors) used across coding agent runtimes. Skills are organized into buckets and consumed by per-repo configuration emitted by `/setup-rissets-skills`.
 
 ## Language
+
+**Rissets Skills**:
+The Rissets collection of engineering and productivity skills, adapted from the upstream Matt Pocock collection.
+
+**Runtime**:
+The coding agent application that discovers and runs a skill, such as Claude Code, Codex, Pi Agent, Antigravity, or OpenCode.
 
 **Issue tracker**:
 The tool that hosts a repo's issues: GitHub Issues, Linear, a local `.scratch/` markdown convention, or similar. Skills like `to-tickets`, `to-spec`, and `triage` read from and write to it.

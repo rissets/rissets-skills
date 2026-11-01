@@ -1,18 +1,10 @@
-<p>
-  <a href="https://www.aihero.dev/s/skills-newsletter">
-    <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="https://res.cloudinary.com/total-typescript/image/upload/v1777382277/skills-repo-dark_2x.png">
-      <source media="(prefers-color-scheme: light)" srcset="https://res.cloudinary.com/total-typescript/image/upload/v1777382277/skill-repo-light_2x.png">
-      <img alt="Skills" src="https://res.cloudinary.com/total-typescript/image/upload/v1777382277/skill-repo-light_2x.png" width="369">
-    </picture>
-  </a>
-</p>
+# Rissets Skills
 
-# Skills For Real Engineers
+[![skills.sh](https://skills.sh/b/rissets/rissets-skills)](https://skills.sh/rissets/rissets-skills)
 
-[![skills.sh](https://skills.sh/b/mattpocock/skills)](https://skills.sh/mattpocock/skills)
+Agent skills for engineering and productivity, maintained by Rissets.
 
-My agent skills that I use every day to do real engineering - not vibe coding.
+Documentation: [hi.rissets.com](https://hi.rissets.com). Adapted from [Matt Pocock’s skills](https://github.com/mattpocock/skills), under the [MIT license](./LICENSE).
 
 Developing real applications is hard. Approaches like GSD, BMAD, and Spec-Kit try to help by owning the process. But while doing so, they take away your control and make bugs in the process hard to resolve.
 
@@ -20,11 +12,11 @@ These skills are designed to be small, easy to adapt, and composable. They work 
 
 If you want to keep up with changes to these skills, and any new ones I create, you can join ~60,000 other devs on my newsletter:
 
-[Sign Up To The Newsletter](https://www.aihero.dev/s/skills-newsletter)
+[Sign Up To The Newsletter](https://hi.rissets.com)
 
 ## Installation (30-second setup)
 
-A plugin updates itself. [skills.sh](https://skills.sh/mattpocock/skills) copies editable files into your project, and you update them by hand. Pick one per agent, because installing both gives you every skill twice.
+A plugin updates itself. [skills.sh](https://skills.sh/rissets/rissets-skills) copies editable files into your project, and you update them by hand. Pick one per agent, because installing both gives you every skill twice.
 
 ### 1. Get the skills
 
@@ -32,10 +24,11 @@ A plugin updates itself. [skills.sh](https://skills.sh/mattpocock/skills) copies
 <summary><strong>Claude Code</strong></summary>
 
 ```bash
-claude plugin install mattpocock-skills@claude-plugins-official
+claude plugin marketplace add rissets/rissets-skills
+claude plugin install rissets-skills@rissets
 ```
 
-Updates itself by default.
+Enable auto-update for the `rissets` marketplace in `/plugin` → Marketplaces. Third-party marketplaces do not enable it by default.
 
 </details>
 
@@ -43,8 +36,8 @@ Updates itself by default.
 <summary><strong>Codex</strong></summary>
 
 ```bash
-codex plugin marketplace add mattpocock/skills
-codex plugin add mattpocock-skills@mattpocock
+codex plugin marketplace add rissets/rissets-skills
+codex plugin add rissets-skills@rissets
 ```
 
 Updates itself at startup.
@@ -52,11 +45,11 @@ Updates itself at startup.
 </details>
 
 <details>
-<summary><strong>GitHub Copilot</strong> (CLI and VS Code)</summary>
+<summary><strong>GitHub Copilot (CLI and VS Code)</strong></summary>
 
 ```bash
-copilot plugin marketplace add mattpocock/skills
-copilot plugin install mattpocock-skills@mattpocock
+copilot plugin marketplace add rissets/rissets-skills
+copilot plugin install rissets-skills@rissets
 ```
 
 Then, once, add to `~/.copilot/settings.json`:
@@ -64,21 +57,21 @@ Then, once, add to `~/.copilot/settings.json`:
 ```json
 {
   "extraKnownMarketplaces": {
-    "mattpocock": { "source": { "source": "github", "repo": "mattpocock/skills" }, "autoUpdate": true }
+    "rissets": { "source": { "source": "github", "repo": "rissets/rissets-skills" }, "autoUpdate": true }
   }
 }
 ```
 
-In VS Code, run **Chat: Install Plugin From Source** and enter `https://github.com/mattpocock/skills`. It updates daily.
+In VS Code, run **Chat: Install Plugin From Source** and enter `https://github.com/rissets/rissets-skills`. It updates daily.
 
 </details>
 
 <details>
-<summary><strong>Gemini CLI</strong> (manual updates)</summary>
+<summary><strong>Gemini CLI (manual updates)</strong></summary>
 
 ```bash
-gemini skills install https://github.com/mattpocock/skills.git --path skills/engineering
-gemini skills install https://github.com/mattpocock/skills.git --path skills/productivity
+gemini skills install https://github.com/rissets/rissets-skills.git --path skills/engineering
+gemini skills install https://github.com/rissets/rissets-skills.git --path skills/productivity
 ```
 
 Re-run both commands to update.
@@ -86,19 +79,62 @@ Re-run both commands to update.
 </details>
 
 <details>
-<summary><strong>Any other agent, or editable files</strong> (manual updates)</summary>
+<summary><strong>Pi Agent (manual updates)</strong></summary>
 
 ```bash
-npx skills@latest add mattpocock/skills -a <agent>  # cursor, opencode, devin, windsurf, amp, pi; omit -a to choose
+npx skills@latest add https://github.com/rissets/rissets-skills/tree/main/skills/engineering -a pi --skill '*'
+npx skills@latest add https://github.com/rissets/rissets-skills/tree/main/skills/productivity -a pi --skill '*'
 ```
 
-When the installer asks which skills to take, include `setup-matt-pocock-skills`. To update, run `npx skills@latest update`, and re-run `add` to pick up new skills.
+Manual updates: run `npx skills@latest update`, then re-run both `add` commands to pick up new skills. Installs target the current project; add `-g` to both commands for a global install.
+In Pi, run `/skill:setup-rissets-skills`, then `/skill:ask-rissets`. Use `/reload` after installation in an active session.
 
 </details>
 
-### 2. Run `/setup-matt-pocock-skills`
+<details>
+<summary><strong>Antigravity (manual updates)</strong></summary>
 
-In your agent, run it once per repo. It will:
+```bash
+npx skills@latest add https://github.com/rissets/rissets-skills/tree/main/skills/engineering -a antigravity --skill '*'
+npx skills@latest add https://github.com/rissets/rissets-skills/tree/main/skills/productivity -a antigravity --skill '*'
+```
+
+Manual updates: run `npx skills@latest update`, then re-run both `add` commands to pick up new skills. Installs target the current project; add `-g` to both commands for a global install.
+In Antigravity, ask the agent to load `setup-rissets-skills`, then `ask-rissets`.
+
+</details>
+
+<details>
+<summary><strong>OpenCode (manual updates)</strong></summary>
+
+```bash
+npx skills@latest add https://github.com/rissets/rissets-skills/tree/main/skills/engineering -a opencode --skill '*'
+npx skills@latest add https://github.com/rissets/rissets-skills/tree/main/skills/productivity -a opencode --skill '*'
+```
+
+Manual updates: run `npx skills@latest update`, then re-run both `add` commands to pick up new skills. Installs target the current project; add `-g` to both commands for a global install.
+In OpenCode, ask the agent to load `setup-rissets-skills` using its `skill` tool.
+
+</details>
+
+<details>
+<summary><strong>Any other agent, or editable files (manual updates)</strong></summary>
+
+```bash
+npx skills@latest add https://github.com/rissets/rissets-skills/tree/main/skills/engineering -a <agent> --skill '*'
+npx skills@latest add https://github.com/rissets/rissets-skills/tree/main/skills/productivity -a <agent> --skill '*'
+```
+
+Manual updates: run `npx skills@latest update`, then re-run both `add` commands to pick up new skills. Installs target the current project; add `-g` to both commands for a global install.
+Replace `<agent>` with your installer agent identifier, for example `cursor`, `devin`, `windsurf`, or `amp`.
+
+</details>
+
+[Runtime support and verification](./docs/agents/runtime-support.md).
+
+### 2. Run `/setup-rissets-skills`
+
+Run it once per repo. In Pi, type `/skill:setup-rissets-skills`. In Antigravity and OpenCode, ask the agent to load `setup-rissets-skills`. It will:
 
 - Ask you which issue tracker you want to use (GitHub, GitLab, local files, or anything else you describe)
 - Ask you what labels you apply to tickets when you triage them (`/triage` uses labels)
@@ -108,7 +144,7 @@ In your agent, run it once per repo. It will:
 
 ## Why These Skills Exist
 
-I built these skills as a way to fix common failure modes I see with Claude Code, Codex, and other coding agents.
+These skills address common failure modes in Claude Code, Codex, and other coding agents.
 
 ### #1: The Agent Didn't Do What I Want
 
@@ -144,7 +180,7 @@ I felt the same tension with my agents. Agents are usually dropped into a projec
 Example
 </summary>
 
-Here's an example [glossary](https://github.com/mattpocock/course-video-manager/blob/076a5a7a182db0fe1e62971dd7a68bcadf010f1c/CONTEXT.md) (still named `CONTEXT.md` at that pinned commit, from before the skills renamed the convention), from my `course-video-manager` repo. Which one is easier to read?
+Here's an example [glossary](https://github.com/mattpocock/course-video-manager/blob/076a5a7a182db0fe1e62971dd7a68bcadf010f1c/CONTEXT.md) (still named `CONTEXT.md` at that pinned commit, from before the skills renamed the convention), from the upstream author’s `course-video-manager` repo. Which one is easier to read?
 
 - **BEFORE**: "There's a problem when a lesson inside a section of a course is made 'real' (i.e. given a spot in the file system)"
 - **AFTER**: "There's a problem with the materialization cascade"
@@ -204,7 +240,7 @@ And crucially, [`/improve-codebase-architecture`](./skills/engineering/improve-c
 
 ### Summary
 
-Software engineering fundamentals matter more than ever. These skills are my best effort at condensing these fundamentals into repeatable practices, to help you ship the best apps of your career. Enjoy.
+Software engineering fundamentals matter more than ever. These skills condense these fundamentals into repeatable practices, to help you ship the best apps of your career. Enjoy.
 
 ## Reference
 
@@ -216,11 +252,11 @@ Skills I use daily for code work.
 
 **User-invoked**
 
-- **[ask-matt](./skills/engineering/ask-matt/SKILL.md)**: Ask which skill or flow fits your situation. A router over the user-invoked skills in this repo.
+- **[ask-rissets](./skills/engineering/ask-rissets/SKILL.md)**: Ask which skill or flow fits your situation. A router over the user-invoked skills in this repo.
 - **[grill-with-docs](./skills/engineering/grill-with-docs/SKILL.md)**: Grilling session that also builds your project's domain model, sharpening terminology and updating `GLOSSARY.md` and ADRs inline.
 - **[triage](./skills/engineering/triage/SKILL.md)**: Move issues through a state machine of triage roles.
 - **[improve-codebase-architecture](./skills/engineering/improve-codebase-architecture/SKILL.md)**: Scan a codebase for deepening opportunities, present them as a visual HTML report, then grill through whichever one you pick.
-- **[setup-matt-pocock-skills](./skills/engineering/setup-matt-pocock-skills/SKILL.md)**: Configure this repo for the engineering skills (issue tracker, triage labels, domain doc layout). Run once per repo before using the other engineering skills.
+- **[setup-rissets-skills](./skills/engineering/setup-rissets-skills/SKILL.md)**: Configure this repo for the engineering skills (issue tracker, triage labels, domain doc layout). Run once per repo before using the other engineering skills.
 - **[to-spec](./skills/engineering/to-spec/SKILL.md)**: Turn the current conversation into a spec and publish it to the issue tracker. No interview, just synthesizes what you've already discussed.
 - **[to-tickets](./skills/engineering/to-tickets/SKILL.md)**: Break any plan, spec, or conversation into a set of tracer-bullet tickets, each declaring its blocking edges, written as text in a local file, or as native blocking links on a real tracker.
 - **[implement](./skills/engineering/implement/SKILL.md)**: Build the work described by a spec or set of tickets, driving `/tdd` at pre-agreed seams and closing out with `/code-review` before committing.
